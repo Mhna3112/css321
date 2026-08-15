@@ -1,66 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>National Parks Explorer</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Bài tập 1 – Grid & Flex</title>
+
+    <style>
+        /* ── RESET & NỀN ── */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #222; /* tương phản tốt với nền sáng */
+        }
+
+        /* ── SKIP LINK (ẩn cho đến khi focus) ── */
+        .skip-link {
+            position: absolute;
+            top: -999px;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 8px 16px;
+            z-index: 1000;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ── NAV: inline-block + rộng 80% ── */
+        nav {
+            display: inline-block;
+            width: 80%;
+            background: #263238;
+            padding: 12px 20px;
+            border-radius: 8px;
+        }
+
+        /* ── BỘ CHỌN CON CHÁU: chỉ ảnh trong nav có width 10% ── */
+        nav img {
+            width: 10%;
+            vertical-align: middle;
+            border-radius: 4px;
+        }
+
+        nav ul {
+            display: inline-block;
+            list-style: none;
+            margin: 0 0 0 20px;
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        /* ── COMMENT: đã comment toàn bộ style cũ của li ── */
+        /*
+        li {
+            display: inline;
+            margin: 0 12px;
+            font-weight: bold;
+            color: #fff;
+        }
+        */
+
+        nav ul li {
+            display: inline;
+            margin: 0 12px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        /* ── GRID class: 2 cột, mỗi cột ~40% ── */
+        .grid {
+            display: grid;
+            grid-template-columns: 40% 40%;
+            justify-content: center;   /* căn giữa 2 cột */
+            align-items: center;       /* căn giữa nội dung theo chiều dọc */
+            row-gap: 24px;            /* khoảng cách giữa các hàng */
+            background: #e8eaf6;
+            padding: 24px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* ── BỘ CHỌN CON CHÁU: chỉ ảnh trong .grid có width 100% ── */
+        .grid img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* ── FLEX class (dành cho Parks) ── */
+        .flex {
+            display: flex;
+            flex-wrap: wrap;            /* xuống dòng khi hết chỗ */
+            justify-content: space-around; /* dàn đều các ảnh */
+            background: #e0f2f1;
+            padding: 24px;
+            border-radius: 8px;
+            margin-top: 20px;
+            gap: 16px;
+        }
+
+        /* Ảnh trong flex có kích thước cố định, không bị ảnh hưởng bởi .grid img */
+        .flex img {
+            width: 150px;
+            border-radius: 8px;
+        }
+
+        /* ── Các phần heading ── */
+        h1 {
+            margin-top: 30px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #555;
+        }
+        hr {
+            margin: 40px 0 20px;
+            border: 1px dashed #aaa;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ===== SKIP TO MAIN CONTENT ===== -->
-    <a href="#main" class="skip-link">Skip to Main Content</a>
+    <!-- ✅ SKIP TO MAIN CONTENT -->
+    <a href="#main" class="skip-link">Chuyển đến nội dung chính</a>
 
-    <!-- ===== HEADER / NAV ===== -->
     <header>
         <nav>
-            <!-- nav image – styled via descendent selector -->
-            <img src="https://via.placeholder.com/100x60/2c3e50/ffffff?text=LOGO" alt="Site Logo" class="nav-logo" />
+            <!-- Ảnh logo – được style bằng nav img -->
+            <img src="https://via.placeholder.com/100/1a237e/ffffff?text=LOGO" alt="Logo" />
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="parks.html">Parks</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#parks">Công viên</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Liên hệ</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- ===== MAIN CONTENT (with id for skip link) ===== -->
+    <!-- ✅ MAIN với id để skip link nhảy tới -->
     <main id="main">
-        <h1>Welcome to National Parks Explorer</h1>
-        <p>Discover the beauty of America's national parks. From the rugged mountains of Yellowstone to the majestic cliffs of Zion, there's a park for every adventurer.</p>
 
-        <!-- ===== GRID SECTION ===== -->
-        <section class="grid-section">
-            <h2>Featured Parks</h2>
+        <!-- ====== PHẦN HOME (dùng Grid) ====== -->
+        <section id="home">
+            <h1>🏠 Trang chủ – Grid 2 cột</h1>
             <div class="grid">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/400x250/2ecc71/ffffff?text=Yellowstone" alt="Yellowstone National Park" />
-                    <h3>Yellowstone</h3>
-                    <p>Home to geysers, hot springs, and diverse wildlife.</p>
-                </div>
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/400x250/3498db/ffffff?text=Zion" alt="Zion National Park" />
-                    <h3>Zion</h3>
-                    <p>Stunning red cliffs and the famous Narrows hike.</p>
-                </div>
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/400x250/e67e22/ffffff?text=Yosemite" alt="Yosemite National Park" />
-                    <h3>Yosemite</h3>
-                    <p>Granite cliffs, waterfalls, and giant sequoias.</p>
-                </div>
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/400x250/9b59b6/ffffff?text=Rocky+Mountain" alt="Rocky Mountain National Park" />
-                    <h3>Rocky Mountain</h3>
-                    <p>Alpine lakes, towering peaks, and abundant wildlife.</p>
-                </div>
+                <img src="https://via.placeholder.com/300/e53935/ffffff?text=Grid+1" alt="Ảnh grid 1" />
+                <img src="https://via.placeholder.com/300/43a047/ffffff?text=Grid+2" alt="Ảnh grid 2" />
+                <img src="https://via.placeholder.com/300/1e88e5/ffffff?text=Grid+3" alt="Ảnh grid 3" />
+                <img src="https://via.placeholder.com/300/fdd835/000000?text=Grid+4" alt="Ảnh grid 4" />
             </div>
         </section>
+
+        <hr />
+
+        <!-- ====== PHẦN PARKS (dùng Flex) ====== -->
+        <section id="parks">
+            <h1>🌲 Công viên – Flex wrap</h1>
+            <div class="flex">
+                <img src="https://via.placeholder.com/150/ff8f00/ffffff?text=Park+1" alt="Công viên 1" />
+                <img src="https://via.placeholder.com/150/6a1b9a/ffffff?text=Park+2" alt="Công viên 2" />
+                <img src="https://via.placeholder.com/150/00838f/ffffff?text=Park+3" alt="Công viên 3" />
+                <img src="https://via.placeholder.com/150/d81b60/ffffff?text=Park+4" alt="Công viên 4" />
+                <img src="https://via.placeholder.com/150/bf360c/ffffff?text=Park+5" alt="Công viên 5" />
+            </div>
+        </section>
+
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer>
-        <p>&copy; 2026 National Parks Explorer. All rights reserved.</p>
+        <p>&copy; 2026 – Bài tập 1 (gộp cả Grid và Flex trong 1 file)</p>
     </footer>
 
 </body>
